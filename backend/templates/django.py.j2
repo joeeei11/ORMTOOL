@@ -1,0 +1,13 @@
+from django.db import models
+{% for entity in entities %}
+
+class {{ entity.name }}(models.Model):
+{% for field in entity.fields %}
+    {{ field.name }} = models.{{ django_type(field) }}({{ django_field_args(field) }})
+{% endfor %}
+{% for rel in relations_for(entity.id) %}
+    # relationship({{ rel.type }})
+{% endfor %}
+    class Meta:
+        db_table = '{{ entity.name | lower }}'
+{% endfor %}

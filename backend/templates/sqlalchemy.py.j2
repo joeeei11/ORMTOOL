@@ -1,0 +1,15 @@
+from sqlalchemy import Column, Integer, String, Text, Boolean, Float, DateTime, Date
+from sqlalchemy.orm import relationship, declarative_base
+
+Base = declarative_base()
+{% for entity in entities %}
+
+class {{ entity.name }}(Base):
+    __tablename__ = '{{ entity.name | lower }}'
+{% for field in entity.fields %}
+    {{ field.name }} = Column({{ sa_col_type(field) }}{% if field.primary_key %}, primary_key=True{% endif %}{% if not field.nullable %}, nullable=False{% endif %})
+{% endfor %}
+{% for rel in relations_for(entity.id) %}
+    # relationship({{ rel.type }}): {{ rel_label(rel) }}
+{% endfor %}
+{% endfor %}

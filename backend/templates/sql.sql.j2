@@ -1,0 +1,7 @@
+{% for entity in entities %}
+{% if not loop.first %}
+
+{% endif %}CREATE TABLE IF NOT EXISTS `{{ entity.name | lower }}` (
+{{ format_fields(entity) }}
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+{% endfor %}
