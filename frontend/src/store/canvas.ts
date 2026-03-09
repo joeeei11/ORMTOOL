@@ -28,6 +28,7 @@ interface CanvasStore {
   removeField: (entityId: string, fieldName: string) => void
   updateField: (entityId: string, fieldIndex: number, field: EntityField) => void
   setGeneratedCode: (code: string) => void
+  removeEntity: (id: string) => void
   loadFromData: (data: CanvasData) => void
   getCanvasData: () => CanvasData
 }
@@ -75,6 +76,13 @@ export const useCanvasStore = create<CanvasStore>((set, get) => ({
   selectNode: (id) => set({ selectedNodeId: id }),
 
   setGeneratedCode: (code) => set({ generatedCode: code }),
+
+  removeEntity: (id) =>
+    set((state) => ({
+      nodes: state.nodes.filter((n) => n.id !== id),
+      edges: state.edges.filter((e) => e.source !== id && e.target !== id),
+      selectedNodeId: state.selectedNodeId === id ? null : state.selectedNodeId,
+    })),
 
   updateEntityName: (id, name) =>
     set((state) => ({

@@ -21,7 +21,7 @@ const sidebarStyle: React.CSSProperties = {
 }
 
 export default function Sidebar() {
-  const { nodes, selectedNodeId, updateEntityName, addField, removeField, updateField } =
+  const { nodes, selectedNodeId, updateEntityName, addField, removeField, updateField, removeEntity } =
     useCanvasStore()
 
   const selectedNode = selectedNodeId ? nodes.find((n) => n.id === selectedNodeId) : null
@@ -48,7 +48,23 @@ export default function Sidebar() {
   return (
     <div style={{ ...sidebarStyle, padding: 16 }}>
       <div style={{ marginBottom: 16 }}>
-        <label style={{ display: 'block', marginBottom: 4, fontWeight: 'bold' }}>实体名</label>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+          <label style={{ fontWeight: 'bold' }}>实体名</label>
+          <button
+            onClick={() => removeEntity(selectedNodeId!)}
+            style={{
+              padding: '2px 8px',
+              background: '#fff',
+              border: '1px solid #f44336',
+              borderRadius: 3,
+              color: '#f44336',
+              cursor: 'pointer',
+              fontSize: 12,
+            }}
+          >
+            删除实体
+          </button>
+        </div>
         <input
           value={name}
           onChange={(e) => updateEntityName(selectedNodeId!, e.target.value)}
