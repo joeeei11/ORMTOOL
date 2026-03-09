@@ -62,6 +62,11 @@
 - **决策**：`exportPNG`/`exportSVG` 使用 `document.querySelector('.react-flow')` 获取目标元素，强转为 `HTMLElement`
 - **影响**：export.ts 与 Canvas 组件解耦，无需传递 ref；若 @xyflow/react 未来改变类名则需同步更新
 
+### .claude/ 目录加入 .gitignore
+- **背景**：Claude Code 在项目根目录下自动创建 `.claude/` 目录存放跨会话记忆文件（非项目代码）
+- **决策**：在 `.gitignore` 中排除 `.claude/`，避免将工具内部状态文件提交到版本库
+- **影响**：不影响项目功能；协作者 clone 后不会看到任何 Claude Code 相关文件
+
 ### 实体名输入框使用 onChange 实时更新
 - **背景**：current.md 描述为"失焦后保存"，但完成标准要求"修改实体名，节点标题实时更新"，两者矛盾
 - **决策**：以完成标准为准，使用 `onChange` 每次击键即调用 `updateEntityName` 写入 store，无需维护本地 state

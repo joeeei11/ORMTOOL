@@ -165,4 +165,8 @@ Phase 6 完成，所有四个 Phase 均已实现。
 - `README.md` 内容完整 ✅
 
 ### 当前状态
-全部 Phase（1–7）完成。项目可按 README.md 启动并使用。
+全部 Phase（1–7）完成。项目已推送至 GitHub：https://github.com/joeeei11/ORMTOOL
+
+---
+
+## 项目已完结
